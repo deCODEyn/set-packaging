@@ -3,6 +3,27 @@ import { Box } from '../../boxes/entities/box.entity';
 import { BOX_SIZES } from '../../constants/boxes.constants';
 import { PackedBox } from '../types/packed-box';
 
+function fitsWithRotation(product: Product, box: Box): boolean {
+  const dims = [product.height, product.width, product.length];
+  const boxDims = [box.height, box.width, box.length];
+
+  const permutations = [
+    [0, 1, 2],
+    [0, 2, 1],
+    [1, 0, 2],
+    [1, 2, 0],
+    [2, 0, 1],
+    [2, 1, 0],
+  ];
+
+  return permutations.some(
+    (variant) =>
+      dims[variant[0]] <= boxDims[0] &&
+      dims[variant[1]] <= boxDims[1] &&
+      dims[variant[2]] <= boxDims[2],
+  );
+}
+
 export function packProducts(products: Product[]): PackedBox[] {
   const result: PackedBox[] = [];
   const productsWithoutBox: Product[] = [...products];
@@ -23,7 +44,7 @@ export function packProducts(products: Product[]): PackedBox[] {
 
         //Tenta colocar outros produtos na mesma caixa
         for (let i = productsWithoutBox.length - 1; i >= 0; i--) {
-          if (box.fits(productsWithoutBox[i])) {
+          if (fitsWithRotation(productsWithoutBox[i], selectedBox)) {
             selectedBox.products.push(productsWithoutBox[i].productId);
             productsWithoutBox.splice(i, 1);
           }
@@ -38,7 +59,7 @@ export function packProducts(products: Product[]): PackedBox[] {
       result.push({
         boxId: null,
         products: [product.productId],
-        note: "O produto não cabe em nenhuma caixa disponível.",
+        note: 'O produto não cabe em nenhuma caixa disponível.',
       });
     }
   }
