@@ -1,4 +1,4 @@
-import { Box } from "src/boxes/entities/box.entity";
+import { Box } from 'src/boxes/entities/box.entity';
 
 export const BOX_SIZES: Box[] = [
   new Box('Box 1', 30, 40, 80),

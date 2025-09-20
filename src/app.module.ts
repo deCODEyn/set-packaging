@@ -9,7 +9,7 @@ import { ConfigModule } from '@nestjs/config';
     ConfigModule.forRoot({ isGlobal: true }),
     OrdersModule,
     ProductsModule,
-    BoxesModule
+    BoxesModule,
   ],
 })
 export class AppModule {}

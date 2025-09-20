@@ -4,7 +4,12 @@ export class Product {
   width: number;
   length: number;
 
-  constructor(productId: string, height: number, width: number, length: number) {
+  constructor(
+    productId: string,
+    height: number,
+    width: number,
+    length: number,
+  ) {
     this.productId = productId;
     this.height = height;
     this.width = width;
