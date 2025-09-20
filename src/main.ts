@@ -10,6 +10,7 @@ async function bootstrap() {
     .setTitle('Set Packaging - API')
     .setDescription('API that calculates the best box to pack orders')
     .setVersion('1.0')
+    .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
