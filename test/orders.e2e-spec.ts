@@ -6,14 +6,20 @@ import { AppModule } from '../src/app.module';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication<App>;
+  let token: string;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
     }).compile();
-
     app = moduleFixture.createNestApplication();
     await app.init();
+    // Faz login para pegar o token
+    const loginRes = await request(app.getHttpServer())
+      .post('/auth/login')
+      .send({ username: 'admin', password: 'admin' })
+      .expect(201);
+    token = loginRes.body.access_token;
   });
 
   afterAll(async () => {
@@ -34,6 +40,7 @@ describe('AppController (e2e)', () => {
     };
     const response = await request(app.getHttpServer())
       .post('/orders/pack')
+      .set('Authorization', `Bearer ${token}`)
       .send(input)
       .expect(200);
     expect(response.body.orders).toBeDefined();
