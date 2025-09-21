@@ -32,8 +32,14 @@ describe('AppController (e2e)', () => {
         {
           pedido_id: 1,
           produtos: [
-            { produto_id: 'PS5', dimensoes: { altura: 40, largura: 10, comprimento: 25 } },
-            { produto_id: 'Volante', dimensoes: { altura: 40, largura: 30, comprimento: 30 } },
+            {
+              produto_id: 'PS5',
+              dimensoes: { altura: 40, largura: 10, comprimento: 25 },
+            },
+            {
+              produto_id: 'Volante',
+              dimensoes: { altura: 40, largura: 30, comprimento: 30 },
+            },
           ],
         },
       ],

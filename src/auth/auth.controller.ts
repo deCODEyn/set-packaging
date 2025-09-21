@@ -9,7 +9,7 @@ export class AuthController {
 
   @Post('login')
   @ApiBody({ type: LoginDto })
-  async login(@Body() body: { username: string; password: string }) {
+  login(@Body() body: { username: string; password: string }) {
     const user = this.authService.validateUser(body.username, body.password);
     if (!user) throw new UnauthorizedException('Invalid credentials');
     return this.authService.login(user);

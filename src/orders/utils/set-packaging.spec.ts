@@ -13,7 +13,9 @@ describe('packProducts', () => {
     const product = new Product('Cadeira Gamer', 120, 60, 70);
     const result = packProducts([product]);
     expect(result[0].boxId).toBeNull();
-    expect(result[0].note).toBe('O produto não cabe em nenhuma caixa disponível.');
+    expect(result[0].note).toBe(
+      'O produto não cabe em nenhuma caixa disponível.',
+    );
   });
 
   it('deve caber em uma caixa se for necessário rotacionar', () => {
@@ -27,6 +29,8 @@ describe('packProducts', () => {
     const product = new Product('TooBig', 200, 200, 200);
     const result = packProducts([product]);
     expect(result[0].boxId).toBeNull();
-    expect(result[0].note).toBe('O produto não cabe em nenhuma caixa disponível.');
+    expect(result[0].note).toBe(
+      'O produto não cabe em nenhuma caixa disponível.',
+    );
   });
 });

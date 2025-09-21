@@ -106,13 +106,14 @@ Authorization: Bearer <token>
       "orderId": 1,
       "boxes": [
         {
-          "id": "box-1",
-          "products": ["PS5", "Volante"],
-          "dimensions": {
-            "height": 40,
-            "width": 30,
-            "length": 30
-          }
+          "boxId": "Box 2",
+          "height": 50,
+          "width": 50,
+          "length": 40,
+          "products": [
+            "PS5",
+            "Volante"
+          ]
         }
       ]
     }
@@ -125,13 +126,12 @@ Authorization: Bearer <token>
 ### Pré-requisitos
 
 - Docker instalado
-- Docker Compose (opcional)
 
 ### Build e Execução
 
 1. **Clone o repositório:**
 ```bash
-git clone <url-do-repositorio>
+git clone https://github.com/deCODEyn/set-packaging.git
 cd set-packaging
 ```
 
@@ -199,6 +199,7 @@ O projeto inclui uma suíte completa de testes automatizados:
    - `src/orders/utils/set-packaging.spec.ts`
 
 2. **Testes End-to-End** - Testam o fluxo completo da aplicação
+   - `test/auth.e2e-spec.ts`
    - `test/orders.e2e-spec.ts`
 
 ### Executando os Testes
@@ -241,6 +242,7 @@ src/
 └── main.ts              # Ponto de entrada da aplicação
 
 test/                     # Testes end-to-end
+├── auth.e2e-spec.ts
 ├── orders.e2e-spec.ts
 └── jest-e2e.json
 
@@ -259,7 +261,7 @@ A aplicação utiliza as seguintes variáveis de ambiente:
 
 ### Configurações JWT
 
-As configurações JWT estão definidas em `src/constants/auth.constants.ts`:
+As configurações JWT estão definidas em `src/constants/auth.constants.ts`. São utilizadas apenas para demonstração por esse motivo o JWT_SECRET não está em .env:
 
 - `JWT_SECRET` - Chave secreta para assinar os tokens
 - `JWT_EXPIRATION` - Tempo de expiração dos tokens (1 hora)
